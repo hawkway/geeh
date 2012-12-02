@@ -23,12 +23,10 @@ build() {
 		cd $_gitname && git pull origin
 		msg "The local files are updated."
 	else
-		git clone $_gitroot $_gitname
+		msg "GIT checkout done or server timeout"
+		msg "Starting make..."
+		git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
 	fi
-	
-	msg "GIT checkout done or server timeout"
-	msg "Starting make..."
-	git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
 }
 
 package() {
