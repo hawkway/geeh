@@ -97,7 +97,7 @@ _repo10[3]=""
 ## functions
 gh_check() {
 	# sanity check
-	if [ `id -u` -eq 0 ]; then
+	if [ $(id -u) -eq 0 ]; then
 	   echo "Do not run me as root! =)"
 	   exit 1
 	fi
