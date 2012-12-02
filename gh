@@ -1,7 +1,7 @@
 #!/bin/bash
 ## 12-02-2012 pdq
 
-## install with: wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U gh* 
+## install with: wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U gh* && cd
 
 # gh (GitHub -option)
 
@@ -28,7 +28,7 @@ mkdir -p ${dev_directory}
 
 ## configuration begin
 
-# number of your github repos (default 10)
+# number of YOUR github repos (default 10)
 _repo_count=10
 
 # github repo Number 1
