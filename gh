@@ -1,0 +1,215 @@
+#!/bin/bash
+## 12-02-2012 pdq
+
+# gh (GitHub -option)
+
+# -V print version number
+# -b backup [-b]
+# -c clone github repo [-c user/repo]
+# -r create github repo [-r user/repo]
+# -s create submodule [-s user/submodule -r /user/repo]
+# -q quiet backup
+
+# path to your local github directory
+dev_directory="$HOME/github/"      # $HOME/github
+
+# commit message arg
+commit_msg=$1
+
+## initalize options
+quiet=; _backup=; _clone=; _create_repo=; _create_submodule=
+
+## Creating backups/github directory on host if not exist
+mkdir -p ${dev_directory}
+
+
+### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
+
+
+## configuration begin
+
+# number of your github repos (default 9)
+_repo_count=9
+
+# github repo Number 1
+_repo1[1]="idk"  # user
+_repo1[2]="pdq"  # repository
+# custom commands
+_repo1[3]="$(cp $HOME/.xinitrc ${dev_directory}${_repo1[2]}/.xinitrc;cp $HOME/.bashrc ${dev_directory}${_repo1[2]}/.bashrc;cp $HOME/.bash_profile ${dev_directory}${_repo1[2]}/.bash_profile;cp $HOME/.dmenu_cache ${dev_directory}${_repo1[2]}/.dmenu_cache;cp $HOME/.nanorc ${dev_directory}${_repo1[2]}/.nanorc;cp $HOME/.gtkrc-2.0 ${dev_directory}${_repo1[2]}/.gtkrc-2.0;cp $HOME/.config/spacefm/bookmarks ${dev_directory}${_repo1[2]}/.config/spacefm/bookmarks;cp $HOME/.config/fontconfig/fonts.conf ${dev_directory}${_repo1[2]}/.config/fontconfig/fonts.conf;cp $HOME/.config/htop/htoprc ${dev_directory}${_repo1[2]}/.config/htop/htoprc;cp $HOME/.config/pacaur/config ${dev_directory}${_repo1[2]}/.config/pacaur/config;cp $HOME/.config/parcellite/parcelliterc ${dev_directory}${_repo1[2]}/.config/parcellite/parcelliterc;cp $HOME/.config/transmission-daemon/settings.json ${dev_directory}${_repo1[2]}/.config/transmission-daemon/settings.json;pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" > ${dev_directory}${_repo1[2]}/main.lst;pacman -Qqm > ${dev_directory}${_repo1[2]}/local.lst)"
+# github repo Number 2
+_repo2[1]="idk"  # user
+_repo2[2]="eggdrop-scripts"  # repository
+_repo2[3]="$(cp -r $HOME/.eggdrop/scripts/custom/ ${dev_directory}${_repo2[2]})"
+
+# github repo Number 3
+_repo3[1]="idk"  # user
+_repo3[2]="zsh"  # repository
+_repo3[3]="$(cp $HOME/.zshrc ${dev_directory}${_repo3[2]}/.zshrc;cp $HOME/.zprofile ${dev_directory}${_repo3[2]}/.zprofile;cp -r $HOME/.zsh ${dev_directory}${_repo3[2]})"
+
+# github repo Number 4
+_repo4[1]="idk"  # user
+_repo4[2]="awesomewm-X"  # repository
+_repo4[3]="$(cp -r $HOME/.config/awesome/. ${dev_directory}${_repo4[2]})"
+
+# github repo Number 5
+_repo5[1]="idk"  # user
+_repo5[2]="conky-X"  # repository
+_repo5[3]="$(cp -r $HOME/.config/conky/. ${dev_directory}${_repo5[2]})"
+
+# github repo Number 6
+_repo6[1]="idk"  # user
+_repo6[2]="bin"  # repository
+_repo6[3]="$(cp -r $HOME/bin/. ${dev_directory}${_repo6[2]};cp /usr/bin/screenfetch ${dev_directory}${_repo6[2]}/screenfetch)"
+
+# github repo Number 7
+_repo7[1]="idk"  # user
+_repo7[2]="etc"  # repository
+_repo7[3]="$(cp /etc/modules-load.d/my_modules.conf ${dev_directory}${_repo7[2]}/my_modules.conf;cp /etc/php/php.ini ${dev_directory}${_repo7[2]}/php.ini;cp /etc/tor/torrc ${dev_directory}${_repo7[2]}/torrc;cp /etc/pacman.conf ${dev_directory}${_repo7[2]}/pacman.conf;cp /etc/pacman.d/mirrorlist ${dev_directory}${_repo7[2]}/mirrorlist;cp /etc/X11/xorg.conf.d/custom.conf ${dev_directory}${_repo7[2]}/custom.conf)"
+
+# github repo Number 8
+_repo8[1]="idk"  # user
+_repo8[2]="systemd"  # repository
+_repo8[3]="$(cp -r /etc/systemd/system/* ${dev_directory}${_repo8[2]})"
+
+# github repo Number 9
+_repo9[1]="idk"  # user
+_repo9[2]="php"  # repository
+_repo9[3]="$(cp -r $HOME/php/* ${dev_directory}${_repo9[2]})"
+
+# github repo Number 10
+#_repo10[1]="idk"  # user
+#_repo10[2]="luakit-X"  # repository
+#_repo10[3]="$(cp -r $HOME/.config/luakit/. ${dev_directory}${_repo10[2]})"
+
+## configuration end
+
+
+### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
+
+
+## functions
+gh_check() {
+	# sanity check
+	if [ `id -u` -eq 0 ]; then
+	   echo "Do not run me as root! =)"
+	   exit 1
+	fi
+	if [ ! -f /usr/bin/git ]; then
+		dep_pkg=git
+		do_install
+	fi
+	if [ ! -f /usr/bin/hub ]; then
+		dep_pkg=hub
+		do_install
+	fi
+
+	if [ ! -f /usr/bin/git ] || [ ! -f /usr/bin/hub ]; then
+		echo "Exiting..."
+		exit 0
+	fi
+}
+
+ask_something() {
+	echo -n $question
+	while read -r -n 1 -s yn; do
+		if [[ $yn = [YyNn] ]]; then
+			[[ $yn = [Yy] ]] && return=0
+			[[ $yn = [Nn] ]] && return=1
+			break
+		fi
+	done
+	return $return
+}
+
+do_install() {
+	echo "FATAL ERROR: ${dep_pkg} is not installed"
+	question="Install ${dep_pkg} (Y/N)? "
+	if ask_something; then
+		echo "sudo pacman -Syy && sudo pacman -S ${dep_pkg}";
+		sudo pacman -Syy && sudo pacman -S ${dep_pkg}
+	else
+		echo "Exiting..."
+		exit 0
+	fi
+}
+
+git_backup(){
+	for i in $(eval echo {1..$_repo_count})
+	do
+		__user=$(eval echo $(echo '${'_repo$i[1]'}'))
+		__repo=$(eval echo $(echo '${'_repo$i[2]'}'))
+		__command=$(eval echo $(echo '${'_repo$i[3]'}'))
+		echo "${__command}"
+		cd ${dev_directory}${__repo}
+		#git add -A
+		if [ "$commit_msg" == "" ]; then
+			_commit_msg="updated ${__repo} to current working copy"
+		fi
+		#git commit -m "${_commit_msg}"
+		#git push origin master
+		_commit_msg=""
+		echo "${bldgreen} ==> ${__repo} repo pushed to Github.${txtrst}"
+	done
+	echo "${bldgreen} ==> All repos pushed to Github. Goodbye!${txtrst}"
+}
+
+gh_help() {
+	echo  "Usage: `basename $0 ` [-{b|V|q}][-{c|r|s}] [user/{repo|submodule}]" 1>&2
+	exit 1
+}
+
+
+### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
+
+## start script execution
+gh_check
+while getopts "b:c:r:s:qhV" opt
+do
+	_nocmd="w00t"
+    case $opt in
+    V) echo "`basename $0 `: Version: 0.1 Date: 2012/12/02 Author: pdq"
+       exit 1;;
+    b) _backup=yes;;
+    c) _clone=$OPTARG;;
+    r) _create_repo=$OPTARG;;
+    s) _create_submodule=$OPTARG;;
+    q) _quiet=-q;;
+    esac
+done
+
+if [ -z "${_nocmd}" ]; then
+	gh_help
+fi
+
+# getopts
+if [ -n "${_create_submodule}" ]; then
+	hub submodule add ${_create_submodule} ${_quiet}
+fi
+
+if [ -n "${_create_repo}" ]; then
+	echo "create must be run from INSIDE a git repository"
+	pwd
+	question="Create repository here? (Y/N)? "
+	if ask_something; then
+		touch README.md
+		git init
+		git add -A
+		git commit -m "first commit"
+		git remote add origin git@github.com:${_create_repo}.git
+		git push -u origin master
+	fi
+	if [ -d ".git" ]; then
+		hub create ${_create_repo} ${_quiet}
+		echo "git repository '${_create_repo}' created at https://github.com/${_create_repo}"
+	fi
+fi
+
+if [ -n "${_clone}" ]; then
+	hub clone ${_clone} ${_quiet}
+fi
+
+if [ -n "${_backup}" ]; then
+	git_backup
+fi
+
+exit 1
