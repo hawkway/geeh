@@ -162,7 +162,7 @@ git_backup(){
 
 gh_help() {
 	echo  "Usage: `basename $0 ` [-{b|V|q}][-{c|r|s}] [user/{repo|submodule}]" 1>&2
-	exit 1
+	exit 0
 }
 
 
@@ -175,12 +175,13 @@ do
 	_nocmd="w00t"
     case $opt in
     V) echo "`basename $0 `: Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/gh"
-       exit 1;;
+       exit 0;;
     b) _backup=yes;;
     c) _clone=$OPTARG;;
     r) _create_repo=$OPTARG;;
     s) _create_submodule=$OPTARG;;
     q) _quiet=-q;;
+ 	h) gh_help;;
     esac
 done
 
