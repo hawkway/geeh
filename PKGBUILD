@@ -19,25 +19,23 @@ _gitname="gh"
 build() {
 	cd "$srcdir"
 	msg "Connecting to GIT server...."
-
 	if [ -d $_gitname ] ; then
 		cd $_gitname && git pull origin
 		msg "The local files are updated."
 	else
 		git clone $_gitroot $_gitname
 	fi
-
 	msg "GIT checkout done or server timeout"
 	msg "Starting make..."
-
 	rm -rf "$srcdir/$_gitname-build"
 	git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
 	cd "$srcdir/$_gitname-build"
-
-	# Create pkgdir folders
-	install -d $pkgdir/usr/bin
-
-	# Install
-	cp -r gh $pkgdir/usr/bin/gh
 }
 
+package() {
+	cd "$srcdir/$_gitname-build"
+	# Install
+	install -Dm755 "$srcdir/$_gitname-build/$pkgname" "$pkgdir/usr/bin/$pkgname"
+	install -Dm644 "$srcdir/$_gitname-build/man/$pkgname.1" "$pkgdir/usr/local/man/man1/$pkgname.1"
+	gzip /usr/local/man/man1/$pkgname.1
+}
