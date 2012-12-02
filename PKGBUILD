@@ -25,7 +25,7 @@ build() {
 	else
 		msg "GIT checkout done or server timeout"
 		msg "Starting make..."
-		git clone "$srcdir/$_gitname-build"
+		git clone "$srcdir"
 	fi
 }
 
