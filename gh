@@ -30,8 +30,8 @@ mkdir -p ${dev_directory}
 
 ## configuration begin
 
-# number of your github repos (default 9)
-_repo_count=9
+# number of your github repos (default 10)
+_repo_count=10
 
 # github repo Number 1
 _repo1[1]="idk"  # user
@@ -79,6 +79,11 @@ _repo9[2]="php"  # repository
 _repo9[3]="$(cp -r $HOME/php/* ${dev_directory}${_repo9[2]})"
 
 # github repo Number 10
+_repo10[1]="idk"  # user
+_repo10[2]="gh"  # repository
+_repo10[3]=""
+
+# github repo Number 11
 #_repo10[1]="idk"  # user
 #_repo10[2]="luakit-X"  # repository
 #_repo10[3]="$(cp -r $HOME/.config/luakit/. ${dev_directory}${_repo10[2]})"
@@ -150,9 +155,9 @@ git_backup(){
 		#git commit -m "${_commit_msg}"
 		#git push origin master
 		_commit_msg=""
-		echo "${bldgreen} ==> ${__repo} repo pushed to Github.${txtrst}"
+		echo " ==> ${__repo} repo pushed to Github."
 	done
-	echo "${bldgreen} ==> All repos pushed to Github. Goodbye!${txtrst}"
+	echo " ==> All repos pushed to Github. Goodbye!"
 }
 
 gh_help() {
