@@ -1,12 +1,13 @@
 #!/bin/bash
 ## 12-02-2012 pdq
 
-## install with: wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp  && makepkg -sf PKGBUILD && sudo pacman -U gh* 
+## install with: wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U gh* 
 
 # gh (GitHub -option)
 
 # -V print version number
 # -b backup [-b]
+# -m backup commit message [-m]
 # -c clone github repo [-c user/repo]
 # -r create github repo [-r user/repo]
 # -s create submodule [-s user/submodule -r /user/repo]
@@ -15,11 +16,8 @@
 # path to your local github directory
 dev_directory="$HOME/github/"      # $HOME/github
 
-# commit message arg
-commit_msg=$1
-
 ## initalize options
-quiet=; _backup=; _clone=; _create_repo=; _create_submodule=
+quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=
 
 ## Creating backups/github directory on host if not exist
 mkdir -p ${dev_directory}
@@ -150,9 +148,12 @@ git_backup(){
 		cd ${dev_directory}${__repo}
 		pwd
 		#git add -A
-		if [ "$commit_msg" == "" ]; then
+		if [ "${_msg}" == "" ]; then
 			_commit_msg="updated ${__repo} to current working copy"
+		else
+			_commit_msg="${_msg}"
 		fi
+		echo ${_commit_msg}
 		#git commit -m "${_commit_msg}"
 		#git push origin master
 		_commit_msg=""
@@ -162,7 +163,7 @@ git_backup(){
 }
 
 gh_help() {
-	echo  "Usage: `basename $0 ` [-{b|V|q}][-{c|r|s}] [user/{repo|submodule}]" 1>&2
+	echo  "Usage: `basename $0 ` [-{b|V|q}][-{c|r|s|m}] [user/{repo|submodule}|message]" 1>&2
 	exit 0
 }
 
@@ -171,13 +172,14 @@ gh_help() {
 
 ## start script execution
 gh_check
-while getopts "bc:r:s:qhV" opt
+while getopts "bm:c:r:s:qhV" opt
 do
 	_nocmd="w00t"
     case $opt in
     V) echo "`basename $0 `: Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/gh"
        exit 0;;
     b) _backup=yes;;
+    m) _msg=$OPTARG;;
     c) _clone=$OPTARG;;
     r) _create_repo=$OPTARG;;
     s) _create_submodule=$OPTARG;;

@@ -9,7 +9,7 @@ https://github.com/idk/gh
 
 Install with:
 
-    $ wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp  && makepkg -sf PKGBUILD && sudo pacman -U gh* 
+    $ wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U gh* 
 
 
 Depends on: git, hub
@@ -22,6 +22,7 @@ Instructions:
 
     -V print version number
     -b backup [-b]
+    -m backup commit message [-m]
     -c clone github repo [-c user/repo]
     -r create github repo [-r user/repo]
     -s create submodule [-s user/submodule -r /user/repo]
