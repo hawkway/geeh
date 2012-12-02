@@ -20,7 +20,7 @@ build() {
 	cd "$srcdir"
 	msg "Connecting to GIT server...."
 	if [ -d $_gitname-build ] ; then
-		cd $_gitname && git pull origin
+		cd $_gitname-build && git pull origin
 		msg "The local files are updated."
 	else
 		msg "GIT checkout done or server timeout"
