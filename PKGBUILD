@@ -27,9 +27,7 @@ build() {
 	fi
 	msg "GIT checkout done or server timeout"
 	msg "Starting make..."
-	rm -rf "$srcdir/$_gitname-build"
 	git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
-	cd "$srcdir/$_gitname-build"
 }
 
 package() {
@@ -37,5 +35,6 @@ package() {
 	# Install
 	install -Dm755 "$srcdir/$_gitname-build/$pkgname" "$pkgdir/usr/bin/$pkgname"
 	install -Dm644 "$srcdir/$_gitname-build/man/$pkgname.1" "$pkgdir/usr/local/man/man1/$pkgname.1"
-	gzip /usr/local/man/man1/$pkgname.1
+	gzip $pkgdir/usr/local/man/man1/$pkgname.1
+	rm -rf "$srcdir/$_gitname-build"
 }
