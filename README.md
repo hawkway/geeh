@@ -18,14 +18,14 @@ Depends on: git, hub
 Instructions:
 -------------
 
-# gh (GitHub -option)
+    gh (GitHub -option)
 
-# -V print version number
-# -b backup [-b]
-# -c clone github repo [-c user/repo]
-# -r create github repo [-r user/repo]
-# -s create submodule [-s user/submodule -r /user/repo]
-# -q quiet
+    -V print version number
+    -b backup [-b]
+    -c clone github repo [-c user/repo]
+    -r create github repo [-r user/repo]
+    -s create submodule [-s user/submodule -r /user/repo]
+    -q quiet
 
 Contributing
 ------------
