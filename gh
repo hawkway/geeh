@@ -145,9 +145,10 @@ git_backup(){
 	do
 		__user=$(eval echo $(echo '${'_repo$i[1]'}'))
 		__repo=$(eval echo $(echo '${'_repo$i[2]'}'))
-		__command=$(eval echo $(echo '${'_repo$i[3]'}'))
-		echo "${__command}"
+		#__command=$(eval echo $(echo '${'_repo$i[3]'}'))
+		#echo "${__command}"
 		cd ${dev_directory}${__repo}
+		pwd
 		#git add -A
 		if [ "$commit_msg" == "" ]; then
 			_commit_msg="updated ${__repo} to current working copy"
@@ -170,7 +171,7 @@ gh_help() {
 
 ## start script execution
 gh_check
-while getopts "b:c:r:s:qhV" opt
+while getopts "bc:r:s:qhV" opt
 do
 	_nocmd="w00t"
     case $opt in
@@ -220,4 +221,4 @@ if [ -n "${_backup}" ]; then
 	git_backup
 fi
 
-exit 1
+exit 0
