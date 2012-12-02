@@ -3,7 +3,6 @@
 
 ## install with: wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp  && makepkg -sf PKGBUILD && sudo pacman -U gh* 
 
-
 # gh (GitHub -option)
 
 # -V print version number
@@ -11,7 +10,7 @@
 # -c clone github repo [-c user/repo]
 # -r create github repo [-r user/repo]
 # -s create submodule [-s user/submodule -r /user/repo]
-# -q quiet backup
+# -q quiet
 
 # path to your local github directory
 dev_directory="$HOME/github/"      # $HOME/github

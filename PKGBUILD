@@ -38,6 +38,6 @@ build() {
 	install -d $pkgdir/usr/bin
 
 	# Install
-	cp -r pdq $pkgdir/usr/bin/gh
+	cp -r gh $pkgdir/usr/bin/gh
 }
 
