@@ -143,8 +143,8 @@ git_backup(){
 	do
 		__user=$(eval echo $(echo '${'_repo$i[1]'}'))
 		__repo=$(eval echo $(echo '${'_repo$i[2]'}'))
-		#__command=$(eval echo $(echo '${'_repo$i[3]'}'))
-		#echo "${__command}"
+		__cmnd=$(eval echo $(echo '${'_repo$i[3]'}'))
+		${__cmnd}
 		cd ${dev_directory}${__repo}
 		pwd
 		#git add -A
