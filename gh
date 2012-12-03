@@ -15,9 +15,6 @@
 # -q quiet
 
 ### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
-# path to your local github directory
-dev_directory="$HOME/github/"      # $HOME/github
-
 ## initalize options
 quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=
 
