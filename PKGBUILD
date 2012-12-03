@@ -23,7 +23,6 @@ build() {
 		cd $_gitname-build && git pull origin
 		msg "The local files are updated."
 	else
-		msg "GIT checkout done or server timeout"
 		msg "Starting make..."
 		git clone "$_gitroot" "$srcdir/$_gitname-build"
 	fi
