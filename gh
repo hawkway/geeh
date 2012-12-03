@@ -148,9 +148,9 @@ git_backup(){
 		__user=$(eval echo $(echo '${'_repo$i[1]'}'))
 		__repo=$(eval echo $(echo '${'_repo$i[2]'}'))
 		__cmnd=$(eval echo $(echo '${'_repo$i[3]'}'))
-		echo "${__cmnd}"
+		${__cmnd}
 		cd ${dev_directory}${__repo}
-		pwd
+		#pwd
 		#git add -A
 		if [ "${_msg}" == "" ]; then
 			_commit_msg="updated ${__repo} to current working copy"
