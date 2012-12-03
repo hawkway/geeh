@@ -1,6 +1,6 @@
 #!/bin/bash
 ## 12-02-2012 pdq
-
+# blah foo bar
 ## initalize options
 quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=
 
@@ -118,7 +118,7 @@ done
 if [ -z "${_nocmd}" ]; then
 	gh_help
 fi
-
+ 
 # getopts
 if [ -n "${_create_submodule}" ]; then
 	echo "Adding submodule..."
