@@ -1,29 +1,9 @@
 #!/bin/bash
 ## 12-02-2012 pdq
 
-## install with: wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U gh* && cd
-## you should: cp /etc/xdg/gh/gh.conf ~/.config/gh/gh.conf
-
-# gh (GitHub -option)
-
-# -V print version number
-# -b backup [-b]
-# -m backup commit message [-m]
-# -c clone github repo [-c user/repo]
-# -r create github repo [-r user/repo]
-# -s create submodule [-s user/submodule -r /user/repo]
-# -q quiet
-
-### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
 ## initalize options
 quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=
 
-## Creating backups/github directory on host if not exist
-mkdir -p ${dev_directory}
-### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
-
-
-# LOAD CONFIGURATION
 # set xdg config directory
 if [[ -n "${XDG_CONFIG_DIRS}" ]]; then
     xdg_config=($(echo "${XDG_CONFIG_DIRS}" | awk -F ":" '{for (i=1; i<=NF; i++) print $i}' ))
@@ -38,9 +18,8 @@ userconfigdir="${XDG_CONFIG_HOME:-${HOME}/.config}/gh"
 source "$configdir/gh.conf"
 [[ -r "$userconfigdir/gh.conf" ]] && source "$userconfigdir/gh.conf"
 
-#############################################
-#### No need to edit past here ####
-#############################################
+# creating backups/github directory on host if not exist
+mkdir -p ${dev_directory}
 
 gh_check() {
 	# sanity check
@@ -117,7 +96,6 @@ gh_help() {
 	echo  "Usage: $(basename $0) [-{b|V|q}][-{c|r|s|m}] [user/{repo|submodule}|message]" 1>&2
 	exit 0
 }
-
 
 ## start script execution ##
 gh_check
