@@ -149,7 +149,7 @@ git_backup(){
 		__user=$(eval echo $(echo '${'_repo$i[1]'}'))
 		__repo=$(eval echo $(echo '${'_repo$i[2]'}'))
 		__cmnd=$(eval echo $(echo '${'_repo$i[3]'}'))
-		eval "${__cmnd}"
+		#eval "${__cmnd}"
 		cd ${dev_directory}${__repo}
 		#pwd
 		#git add -A
@@ -175,19 +175,42 @@ gh_help() {
 
 ## start script execution ##
 gh_check
-while getopts "bm:c:r:s:qhV" opt
+# while getopts "bm:c:r:s:qhV" opt
+# do
+# 	_nocmd="w00t"
+# 	case $opt in
+# 		V) echo "$(basename $0): Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/gh"
+# 		   exit 0;;
+# 		b) _backup=yes;;
+# 		m) _msg=$OPTARG;;
+# 		c) _clone=$OPTARG;;
+# 		r) _create_repo=$OPTARG;;
+# 		s) _create_submodule=$OPTARG;;
+# 		q) _quiet=-q;;
+# 		h) gh_help;;
+# 	esac
+# done
+
+SHORTOPTS="bm:c:r:s:qhV"
+LONGOPTS="backup,message,:clone,:repocreate,:submodulecreate,:quiet,help,Version"
+
+ARGS=$(getopt -s bash --options $SHORTOPTS  \
+  --longoptions $LONGOPTS --name $PROGNAME -- "$@" )
+
+eval set -- "$ARGS"
+while true
 do
 	_nocmd="w00t"
-	case $opt in
-		V) echo "$(basename $0): Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/gh"
+	case $1 in
+		-V|--Version) echo "$(basename $0): Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/gh"
 		   exit 0;;
-		b) _backup=yes;;
-		m) _msg=$OPTARG;;
-		c) _clone=$OPTARG;;
-		r) _create_repo=$OPTARG;;
-		s) _create_submodule=$OPTARG;;
-		q) _quiet=-q;;
-		h) gh_help;;
+		-b|--backup) _backup=yes;;
+		-m|--message) _msg=$OPTARG;;
+		-c|--clone) _clone=$OPTARG;;
+		-r|--repocreate) _create_repo=$OPTARG;;
+		-s|--submodulecreate) _create_submodule=$OPTARG;;
+		-q|--quiet) _quiet=-q;;
+		-h|--help) gh_help;;
 	esac
 done
 
@@ -197,7 +220,8 @@ fi
 
 # getopts
 if [ -n "${_create_submodule}" ]; then
-	hub submodule add ${_create_submodule} ${_quiet}
+	echo "Addin submodule..."
+	#hub submodule add ${_create_submodule} ${_quiet}
 fi
 
 if [ -n "${_create_repo}" ]; then
@@ -205,16 +229,19 @@ if [ -n "${_create_repo}" ]; then
 	pwd
 	question="Create repository here? (Y/N)?\n"
 	if ask_something; then
-		touch README.md
-		git init
-		git add -A
-		git commit -m "first commit"
+		echo "Initializing repo..."
+		#touch README.md
+		#git init
+		#git add -A
+		#git commit -m "first commit"
 	fi
 
 	if [ -d ".git" ]; then
-		hub create ${_create_repo} ${_quiet}
-		git remote add origin git@github.com:${_create_repo}.git
-		git push -u origin master
+		#hub create ${_create_repo} ${_quiet}
+		echo "This may take up to 10 seconds..."
+		sleep 10s
+		#git remote add origin git@github.com:${_create_repo}.git
+		#git push -u origin master
 		echo "git repository '${_create_repo}' created at https://github.com/${_create_repo}"
 	fi
 fi
