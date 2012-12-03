@@ -17,12 +17,9 @@ Depends on: git, hub
 Setup:
 ------
 
-Edit the file: /usr/bin/gh
-
-    ## configuration begin ##
-    <EDIT AND ADD PERSONAL GITHUB REPOS>
-    ## configuration end ##
-
+Copy and edit the config file:
+    
+    cp /etc/xdg/gh/gh.conf ~/.config/gh/gh.conf
 
 Usage:
 -------------

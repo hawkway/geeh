@@ -30,7 +30,8 @@ build() {
 
 package() {
 	cd "$srcdir/$_gitname-build"
-	# Install
+	mkdir -p "$pkgdir/etc/xdg/$pkgname"
+	install -Dm644 "$srcdir/$_gitname-build/$pkgname.conf" "$pkgdir/etc/xdg/$pkgname/$pkgname.conf"
 	install -Dm755 "$srcdir/$_gitname-build/$pkgname" "$pkgdir/usr/bin/$pkgname"
 	install -Dm644 "$srcdir/$_gitname-build/man/$pkgname.1" "$pkgdir/usr/local/man/man1/$pkgname.1"
 	gzip $pkgdir/usr/local/man/man1/$pkgname.1
