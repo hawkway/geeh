@@ -19,7 +19,7 @@ Setup:
 
 Copy and edit the config file:
     
-    cp /etc/xdg/gh/gh.conf ~/.config/gh/gh.conf
+    mkdir -p ~/.config/gh && cp /etc/xdg/gh/gh.conf ~/.config/gh/gh.conf
 
 Usage:
 -------------
