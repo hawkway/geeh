@@ -164,7 +164,7 @@ git_backup(){
 }
 
 gh_help() {
-	echo  "Usage: `basename $0 ` [-{b|V|q}][-{c|r|s|m}] [user/{repo|submodule}|message]" 1>&2
+	echo  "Usage: $(basename $0) [-{b|V|q}][-{c|r|s|m}] [user/{repo|submodule}|message]" 1>&2
 	exit 0
 }
 
@@ -175,7 +175,7 @@ while getopts "bm:c:r:s:qhV" opt
 do
 	_nocmd="w00t"
     case $opt in
-    V) echo "`basename $0 `: Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/gh"
+    V) echo "$(basename $0): Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/gh"
        exit 0;;
     b) _backup=yes;;
     m) _msg=$OPTARG;;
