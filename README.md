@@ -7,8 +7,8 @@ https://github.com/idk/gh
 
 [linuxdistrocommunity][6]
 
-Install with:
-
+Install:
+--------
     $ wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U gh* && cd
 
 Depends on: git, hub
@@ -23,7 +23,7 @@ Copy and edit the config file:
     mkdir -p ~/.config/gh && cp /etc/xdg/gh/gh.conf ~/.config/gh/gh.conf
 
 Usage:
--------------
+------
 
     gh (GitHub -option)
 
@@ -35,8 +35,8 @@ Usage:
     -s create submodule [-s user/submodule -r /user/repo]
     -q quiet
 
-Contributing
-------------
+Contributing:
+-------------
 
 1. Fork it.
 2. Create a branch (`git checkout -b my_gh`)
