@@ -84,10 +84,10 @@ _repo10[1]=${_github_user}  # user
 _repo10[2]="gh"  # repository
 _repo10[3]=""
 
-github repo Number 11
-_repo11[1]=${_github_user}  # user
-_repo11[2]="luakit-X"  # repository
-_repo11[3]="$(cp -r $HOME/.config/luakit/. ${dev_directory}${_repo11[2]})"
+## github repo Number 11
+# _repo11[1]=${_github_user}  # user
+# _repo11[2]="luakit-X"  # repository
+# _repo11[3]="$(cp -r $HOME/.config/luakit/. ${dev_directory}${_repo11[2]})"
 
 ## configuration end ##
 
