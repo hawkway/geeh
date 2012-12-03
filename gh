@@ -1,22 +1,22 @@
-#!/bin/bash
+#!/bin/sh
 ## 12-02-2012 pdq
 # blah foo bar
 ## initalize options
 quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=
 
 # set xdg config directory
-if [[ -n "${XDG_CONFIG_DIRS}" ]]; then
+if [ -n "${XDG_CONFIG_DIRS}" ]; then
     xdg_config=($(echo "${XDG_CONFIG_DIRS}" | awk -F ":" '{for (i=1; i<=NF; i++) print $i}' ))
     for i in ${xdg_config[@]}; do
-        [[ -d "$i" ]] && export XDG_CONFIG_DIRS=$i && break
+        [ -d "$i" ] && export XDG_CONFIG_DIRS=$i && break
     done
 fi
 
 # config files
 configdir="${XDG_CONFIG_DIRS:-/etc/xdg}/gh"
 userconfigdir="${XDG_CONFIG_HOME:-${HOME}/.config}/gh"
-source "$configdir/gh.conf"
-[[ -r "$userconfigdir/gh.conf" ]] && source "$userconfigdir/gh.conf"
+. "$configdir/gh.conf"
+[ -r "$userconfigdir/gh.conf" ] && . "$userconfigdir/gh.conf"
 
 # creating backups/github directory on host if not exist
 mkdir -p ${dev_directory}
@@ -47,9 +47,9 @@ gh_check() {
 ask_something() {
 	echo -ne $question
 	while read -r -n 1 -s yn; do
-		if [[ $yn = [YyNn] ]]; then
-			[[ $yn = [Yy] ]] && return=0
-			[[ $yn = [Nn] ]] && return=1
+		if [ $yn = [YyNn] ]; then
+			[ $yn = [Yy] ] && return=0
+			[ $yn = [Nn] ] && return=1
 			break
 		fi
 	done
@@ -78,7 +78,7 @@ git_backup(){
 		cd ${dev_directory}${__repo}
 		#pwd
 		git add -A
-		if [ "${_msg}" == "" ]; then
+		if [ "${_msg}" = "" ]; then
 			_commit_msg="updated ${__repo} to current working copy"
 		else
 			_commit_msg="${_msg}"
