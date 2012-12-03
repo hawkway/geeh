@@ -19,9 +19,9 @@ Setup:
 
 Edit the file: /usr/bin/gh
 
-    ## configuration begin
+    ## configuration begin ##
     <EDIT AND ADD PERSONAL GITHUB REPOS>
-    ## configuration end
+    ## configuration end ##
 
 
 Usage:

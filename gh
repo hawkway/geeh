@@ -13,6 +13,7 @@
 # -s create submodule [-s user/submodule -r /user/repo]
 # -q quiet
 
+### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
 # path to your local github directory
 dev_directory="$HOME/github/"      # $HOME/github
 
@@ -21,12 +22,10 @@ quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=
 
 ## Creating backups/github directory on host if not exist
 mkdir -p ${dev_directory}
-
-
 ### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
 
 
-## configuration begin
+## configuration begin ##
 
 # number of YOUR github repos (default 10)
 _repo_count=10
@@ -82,27 +81,29 @@ _repo10[2]="gh"  # repository
 _repo10[3]=""
 
 # github repo Number 11
-#_repo10[1]="idk"  # user
-#_repo10[2]="luakit-X"  # repository
-#_repo10[3]="$(cp -r $HOME/.config/luakit/. ${dev_directory}${_repo10[2]})"
+#_repo11[1]="idk"  # user
+#_repo11[2]="luakit-X"  # repository
+#_repo11[3]="$(cp -r $HOME/.config/luakit/. ${dev_directory}${_repo11[2]})"
 
-## configuration end
-
-
-### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
+## configuration end ##
 
 
-## functions
+#############################################
+#### No need to edit past here ####
+#############################################
+
 gh_check() {
 	# sanity check
 	if [ $(id -u) -eq 0 ]; then
 	   echo "Do not run me as root! =)"
 	   exit 1
 	fi
+
 	if [ ! -f /usr/bin/git ]; then
 		dep_pkg=git
 		do_install
 	fi
+
 	if [ ! -f /usr/bin/hub ]; then
 		dep_pkg=hub
 		do_install
@@ -168,9 +169,7 @@ gh_help() {
 }
 
 
-### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ###
-
-## start script execution
+## start script execution ##
 gh_check
 while getopts "bm:c:r:s:qhV" opt
 do
@@ -207,6 +206,7 @@ if [ -n "${_create_repo}" ]; then
 		git add -A
 		git commit -m "first commit"
 	fi
+
 	if [ -d ".git" ]; then
 		hub create ${_create_repo} ${_quiet}
 		git remote add origin git@github.com:${_create_repo}.git
