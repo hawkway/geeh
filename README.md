@@ -14,8 +14,17 @@ Install with:
 
 Depends on: git, hub
 
+Setup:
+------
 
-Instructions:
+Edit the file: /usr/bin/gh
+
+    ## configuration begin
+    <EDIT AND ADD PERSONAL GITHUB REPOS>
+    ## configuration end
+
+
+Usage:
 -------------
 
     gh (GitHub -option)
