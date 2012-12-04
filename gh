@@ -1,6 +1,6 @@
 #!/bin/sh
 ## 12-02-2012 pdq
-# blah foo bar
+
 ## initalize options
 quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=
 
