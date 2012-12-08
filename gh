@@ -2,7 +2,7 @@
 ## 12-02-2012 pdq
 
 ## initalize options
-quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=
+quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=; _interactive_menu
 
 # set xdg config directory
 if [ -n "${XDG_CONFIG_DIRS}" ]; then
@@ -88,6 +88,7 @@ git_backup(){
 		git push origin master
 		_commit_msg=""
 		echo " ==> ${__repo} repo pushed to Github."
+		sleep 1s
 	done
 	echo " ==> All repos pushed to Github. Goodbye!"
 }
@@ -97,9 +98,55 @@ gh_help() {
 	exit 0
 }
 
+main_menu() {
+	dialog \
+		--colors --title "Github interactive menu" \
+		--menu "\ZbSelect action:" 20 60 17 \
+		1 $clr"Update packages" \
+		2 $clr"Update AUR packages" \
+		3 $clr"Update devel packages" \
+		4 $clr"Search for a package" \
+		5 $clr"Install package" \
+		6 $clr"Mount truecrypt data" \
+		7 $clr"Terminal applications" \
+		8 $clr"GUI applications" \
+		9 $clr"Daemons" \
+		10 $clr"Load all (6,7,8,9)" \
+		11 $clr"Backup files to Github" \
+		12 $clr"Local Syncs" \
+		13 $clr"Remote Syncs" \
+		14 $clr"Remote SQL Dump" \
+		15 $clr"Local SQL Import" \
+		16 $clr"Message of the Day" \
+		17 $clr"Exit" 2>$_TEMP
+
+	choice=$(cat $_TEMP)
+	case $choice in
+		1) update_pkgs;;
+		2) update_aur;;
+		3) update_devel;;
+		4) search_pkgs;;
+		5) install_pkg;;
+		6) mount_tcdata;;
+		7) term_apps;;
+		8) gui_apps;;
+		9) ddaemons;;
+		10) load_session;;
+		11) github_backup;;
+		12) sync_local;;
+		13) sync_remote;;
+		14) db_remote_dump;;
+		15) db_local_import;;
+		16) load_motd;;
+		17) exiting;;
+	esac
+	
+	initialize_start
+}
+
 ## start script execution ##
 gh_check
-while getopts "bm:c:r:s:qhV" opt
+while getopts "bm:c:r:s:qhVN" opt
 do
 	_nocmd="w00t"
 	case $opt in
@@ -111,6 +158,7 @@ do
 		r) _create_repo=$OPTARG;;
 		s) _create_submodule=$OPTARG;;
 		q) _quiet=-q;;
+		N) _interactive_menu=yes;;
 		h) gh_help;;
 	esac
 done
