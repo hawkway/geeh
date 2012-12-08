@@ -2,7 +2,7 @@
 ## 12-02-2012 pdq
 
 ## initalize options
-quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=; _interactive_menu
+quiet=; _backup=; _clone=; _create_repo=; _create_submodule=; _msg=; _interactive_menu=
 
 # set xdg config directory
 if [ -n "${XDG_CONFIG_DIRS}" ]; then
