@@ -1,12 +1,12 @@
-# Maintainer: pdq <pdq@hush.com>
+# Maintainer: pdq <pdq@localhost>
 pkgname=gh
-pkgver=0.0.1
-pkgrel=4
+pkgver=0.1
+pkgrel=1
 pkgdesc="Pretty Damn Quick Github command line tool for Arch linux - GIT Version"
 arch=(any)
 url="https://github.com/idk/gh.git"
 license=('GPL')
-conflicts=(gh-alpha)
+conflicts=(gh-git)
 depends=('pacman' 'git' 'hub')
 optdepends=()
 makedepends=('git')
