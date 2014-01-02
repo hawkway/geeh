@@ -1,7 +1,7 @@
 # Maintainer: pdq <pdq@localhost>
 pkgname=gh
 pkgver=0.1
-pkgrel=3
+pkgrel=4
 pkgdesc="Pretty Damn Quick Github command line tool for Arch linux - GIT Version"
 arch=(any)
 url="https://github.com/idk/gh.git"
@@ -10,6 +10,7 @@ conflicts=(gh-git)
 depends=('pacman' 'git' 'hub')
 optdepends=()
 makedepends=('git')
+groups=moo
 
 _gitroot="git://github.com/idk/gh.git"
 _gitname="gh"
