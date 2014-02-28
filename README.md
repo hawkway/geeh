@@ -1,7 +1,7 @@
 gh
 ==
 
-Github command line tool for Arch Linux
+A Github command line tool for Arch Linux
 
 https://github.com/idk/gh
 
