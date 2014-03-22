@@ -9,7 +9,7 @@ https://github.com/idk/gh
 
 Install:
 --------
-    $ wget https://raw.github.com/idk/gh/master/PKGBUILD -O /tmp/PKGBUILD && cd /tmp && makepkg -sf PKGBUILD && sudo pacman -U gh* && cd
+    $ wget https://raw.github.com/idk/gh/master/PKGBUILD && makepkg -sfi
 
 Depends on: git, hub
 
