@@ -13,15 +13,15 @@ if [ -n "${XDG_CONFIG_DIRS}" ]; then
 fi
 
 # config files
-configdir="${XDG_CONFIG_DIRS:-/etc/xdg}/gh"
-userconfigdir="${XDG_CONFIG_HOME:-${HOME}/.config}/gh"
-. "$configdir/gh.conf"
-[ -r "$userconfigdir/gh.conf" ] && . "$userconfigdir/gh.conf"
+configdir="${XDG_CONFIG_DIRS:-/etc/xdg}/geeh"
+userconfigdir="${XDG_CONFIG_HOME:-${HOME}/.config}/geeh"
+. "$configdir/geeh.conf"
+[ -r "$userconfigdir/geeh.conf" ] && . "$userconfigdir/geeh.conf"
 
 # creating backups/github directory on host if not exist
 mkdir -p ${dev_directory}
 
-gh_check() {
+geeh_check() {
 	# sanity check
 	if [ $(id -u) -eq 0 ]; then
 	   echo "Do not run me as root! =)"
@@ -93,7 +93,7 @@ git_backup(){
 	echo " ==> All repos pushed to Github. Goodbye!"
 }
 
-gh_help() {
+geeh_help() {
 	echo  "Usage: $(basename $0) [-{b|V|q}][-{c|r|s|m}] [user/{repo|submodule}|message]" 1>&2
 	exit 0
 }
@@ -145,12 +145,12 @@ main_menu() {
 }
 
 ## start script execution ##
-gh_check
+geeh_check
 while getopts "bm:c:r:s:qhVN" opt
 do
 	_nocmd="w00t"
 	case $opt in
-		V) echo "$(basename $0): Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/gh"
+		V) echo "$(basename $0): Version: 0.1 Date: 2012/12/02 Author: pdq URL: https://github.com/idk/geeh"
 		   exit 0;;
 		b) _backup=yes;;
 		m) _msg=$OPTARG;;
@@ -159,12 +159,12 @@ do
 		s) _create_submodule=$OPTARG;;
 		q) _quiet=-q;;
 		N) _interactive_menu=yes;;
-		h) gh_help;;
+		h) geeh_help;;
 	esac
 done
 
 if [ -z "${_nocmd}" ]; then
-	gh_help
+	geeh_help
 fi
  
 # getopts

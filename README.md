@@ -1,4 +1,4 @@
-gh
+geeh
 ==
 
 A Github command line tool for Arch Linux
@@ -20,12 +20,12 @@ Setup:
 
 Copy and edit the config file:
     
-    mkdir -p ~/.config/gh && cp /etc/xdg/gh/gh.conf ~/.config/gh/gh.conf
+    mkdir -p ~/.config/geeh && cp /etc/xdg/geeh/geeh.conf ~/.config/geeh/geeh.conf
 
 Usage:
 ------
 
-    gh (GitHub -option)
+    geeh (GitHub -option)
 
     -V print version number
     -b backup [-b]
@@ -39,9 +39,9 @@ Contributing:
 -------------
 
 1. Fork it.
-2. Create a branch (`git checkout -b my_gh`)
+2. Create a branch (`git checkout -b my_geeh`)
 3. Commit your changes (`git commit -am "Added foo and bar"`)
-4. Push to the branch (`git push origin my_gh`)
+4. Push to the branch (`git push origin my_geeh`)
 5. Create an [Issue][7] with a link to your branch
 6. Join the Linux Distro Community IRC or Mumble! :D
 
