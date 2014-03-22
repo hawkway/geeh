@@ -3,13 +3,13 @@ geeh
 
 A Github command line tool for Arch Linux
 
-https://github.com/idk/gh
+https://github.com/idk/geeh
 
 [linuxdistrocommunity][6]
 
 Install:
 --------
-    $ wget https://raw.github.com/idk/gh/master/PKGBUILD && makepkg -sfi
+    $ wget https://raw.github.com/idk/geeh/master/PKGBUILD && makepkg -sfi
 
 Depends on: git, hub
 
@@ -49,4 +49,4 @@ SHARE AND ENJOY!
 ----------------
 
 [6]: http://www.linuxdistrocommunity.com
-[7]: https://github.com/idk/gh/issues
+[7]: https://github.com/idk/geeh/issues
