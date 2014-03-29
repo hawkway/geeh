@@ -1,5 +1,5 @@
 geeh
-==
+====
 
 A Github command line tool for Arch Linux
 
