@@ -1,7 +1,7 @@
 # Maintainer: pdq <pdq@localhost>
 pkgname=geeh
 pkgver=0.1
-pkgrel=5
+pkgrel=6
 pkgdesc="Pretty Damn Quick Github command line tool for Arch linux - GIT Version"
 arch=(any)
 url="https://github.com/idk/gh.git"
