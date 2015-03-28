@@ -60,8 +60,8 @@ do_install() {
 	echo "FATAL ERROR: ${dep_pkg} is not installed"
 	question="Install ${dep_pkg} (Y/N)?\n"
 	if ask_something; then
-		echo "sudo pacman -Syy && sudo pacman -S ${dep_pkg}";
-		sudo pacman -Syy && sudo pacman -S ${dep_pkg}
+		echo "sudo pacman -Syu && sudo pacman -S ${dep_pkg}";
+		sudo pacman -Syu && sudo pacman -S ${dep_pkg}
 	else
 		echo "Exiting..."
 		exit 0
